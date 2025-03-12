@@ -5,96 +5,54 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.romainripoll.motogpmanager.MotoGpManagerApp
-import com.romainripoll.motogpmanager.data.local.GameDatabase
-import com.romainripoll.motogpmanager.data.model.GameState
+import com.romainripoll.motogpmanager.data.model.Team
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
 
-    private val database: GameDatabase = MotoGpManagerApp.instance.database
-    private val gameStateDao = database.gameStateDao()
-    private val teamDao = database.teamDao()
-    private val riderDao = database.riderDao()
-    private val bikeDao = database.bikeDao()
-    private val raceDao = database.raceDao()
-
-    private val _gameState = MutableLiveData<GameState>()
-    val gameState: LiveData<GameState> = _gameState
-
+    private val _teamData = MutableLiveData<Team?>()
+    val teamData: LiveData<Team?> = _teamData
+    
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-
-    init {
-        loadGameState()
-    }
-
-    private fun loadGameState() {
+    
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+    
+    /**
+     * Charge les données de l'équipe à partir de la base de données
+     */
+    fun loadTeamData() {
+        _isLoading.value = true
+        
         viewModelScope.launch {
-            _isLoading.value = true
             try {
-                // Load the game state from database
-                val state = withContext(Dispatchers.IO) {
-                    // Get the current game state or create a new one if none exists
-                    val savedState = gameStateDao.getGameState()
-                    savedState ?: createNewGameState()
-                }
-                _gameState.value = state
-            } catch (e: Exception) {
-                // Handle error
-                e.printStackTrace()
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
-
-    private suspend fun createNewGameState(): GameState {
-        // Create a default game state for new games
-        val defaultState = GameState(
-            id = 1,
-            seasonYear = 2025,
-            currentRaceIndex = 0,
-            teamName = "Your MotoGP Team",
-            budget = 10000000,
-            reputation = 50,
-            researchPoints = 100,
-            gameWeek = 1,
-            staffQuality = 50
-        )
-
-        // Save it to database
-        gameStateDao.insertGameState(defaultState)
-        return defaultState
-    }
-
-    fun saveGameState() {
-        viewModelScope.launch {
-            _gameState.value?.let { state ->
                 withContext(Dispatchers.IO) {
-                    gameStateDao.updateGameState(state)
+                    val database = MotoGpManagerApp.instance.database
+                    
+                    // Récupérer l'état du jeu
+                    val gameState = database.gameStateDao().getGameStates().firstOrNull()
+                    
+                    // Si un état de jeu existe, récupérer l'équipe associée
+                    if (gameState != null) {
+                        val team = database.teamDao().getTeamById(gameState.teamId)
+                        _teamData.postValue(team)
+                    } else {
+                        // Aucun état de jeu trouvé
+                        _teamData.postValue(null)
+                    }
                 }
+            } catch (e: Exception) {
+                _errorMessage.postValue("Erreur lors du chargement des données: ${e.message}")
+            } finally {
+                _isLoading.postValue(false)
             }
         }
     }
-
-    fun updateTeamName(name: String) {
-        _gameState.value = _gameState.value?.copy(teamName = name)
-        saveGameState()
-    }
-
-    fun advanceWeek() {
-        _gameState.value?.let { state ->
-            _gameState.value = state.copy(gameWeek = state.gameWeek + 1)
-            saveGameState()
-        }
-    }
-
-    fun updateBudget(amount: Int) {
-        _gameState.value?.let { state ->
-            _gameState.value = state.copy(budget = state.budget + amount)
-            saveGameState()
-        }
+    
+    fun clearErrorMessage() {
+        _errorMessage.value = null
     }
 }
