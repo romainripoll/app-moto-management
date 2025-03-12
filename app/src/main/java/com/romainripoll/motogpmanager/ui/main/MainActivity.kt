@@ -2,58 +2,52 @@ package com.romainripoll.motogpmanager.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.romainripoll.motogpmanager.R
 import com.romainripoll.motogpmanager.databinding.ActivityMainBinding
-import com.romainripoll.motogpmanager.ui.main.bikes.BikesFragment
-import com.romainripoll.motogpmanager.ui.main.races.RacesFragment
-import com.romainripoll.motogpmanager.ui.main.riders.RidersFragment
-import com.romainripoll.motogpmanager.ui.main.standings.StandingsFragment
-import com.romainripoll.motogpmanager.ui.main.team.TeamFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Initialize ViewModel
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-        // Set up bottom navigation
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_team -> loadFragment(TeamFragment())
-                R.id.nav_riders -> loadFragment(RidersFragment())
-                R.id.nav_bikes -> loadFragment(BikesFragment())
-                R.id.nav_races -> loadFragment(RacesFragment())
-                R.id.nav_standings -> loadFragment(StandingsFragment())
-                else -> false
+        
+        // Configuration du NavController
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        
+        // Configuration de la barre d'action
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController)
+        
+        // Mise à jour du titre en fonction de la destination
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val title = when (destination.id) {
+                R.id.splashFragment -> ""  // Pas de titre pour l'écran de démarrage
+                R.id.teamCreationFragment -> getString(R.string.title_team_creation)
+                R.id.mainFragment -> getString(R.string.title_main)
+                else -> getString(R.string.app_name)
+            }
+            supportActionBar?.title = title
+            
+            // Masquer la barre d'action sur l'écran de démarrage
+            if (destination.id == R.id.splashFragment) {
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
             }
         }
-
-        // Set default fragment
-        if (savedInstanceState == null) {
-            binding.bottomNavigation.selectedItemId = R.id.nav_team
-        }
-
-        // Observe game state changes
-        viewModel.gameState.observe(this) { gameState ->
-            // Update UI based on game state changes
-            supportActionBar?.title = gameState.teamName
-        }
     }
-
-    private fun loadFragment(fragment: Fragment): Boolean {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
-        return true
+    
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
