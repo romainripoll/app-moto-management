@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_team"
+        android:icon="@drawable/ic_team"
+        android:title="@string/nav_team" />
+    <item
+        android:id="@+id/nav_riders"
+        android:icon="@drawable/ic_rider"
+        android:title="@string/nav_riders" />
+    <item
+        android:id="@+id/nav_bikes"
+        android:icon="@drawable/ic_bike"
+        android:title="@string/nav_bikes" />
+    <item
+        android:id="@+id/nav_races"
+        android:icon="@drawable/ic_race"
+        android:title="@string/nav_races" />
+    <item
+        android:id="@+id/nav_standings"
+        android:icon="@drawable/ic_standings"
+        android:title="@string/nav_standings" />
+</menu>
