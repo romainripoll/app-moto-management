@@ -66,14 +66,14 @@ class TeamCreationFragment : Fragment() {
         // Création dynamique des options de couleur
         colorOptions.forEachIndexed { index, colorOption ->
             val cardView = CardView(requireContext()).apply {
-                radius = resources.getDimension(R.dimen.color_option_radius) // Vous devrez ajouter cette dimension
+                radius = resources.getDimension(R.dimen.color_option_radius)
                 setCardBackgroundColor(Color.parseColor(colorOption.hexCode))
                 contentPadding = 0
                 layoutParams = ViewGroup.MarginLayoutParams(
-                    resources.getDimensionPixelSize(R.dimen.color_option_size), // Vous devrez ajouter cette dimension
+                    resources.getDimensionPixelSize(R.dimen.color_option_size),
                     resources.getDimensionPixelSize(R.dimen.color_option_size)
                 ).apply {
-                    marginEnd = resources.getDimensionPixelSize(R.dimen.color_option_margin) // Vous devrez ajouter cette dimension
+                    marginEnd = resources.getDimensionPixelSize(R.dimen.color_option_margin)
                 }
                 
                 // Bordure pour la couleur sélectionnée
@@ -102,10 +102,10 @@ class TeamCreationFragment : Fragment() {
     private fun setupDifficultySlider() {
         binding.sliderDifficulty.addOnChangeListener { _, value, _ ->
             val difficultyText = when (value.toInt()) {
-                1 -> "Facile"
-                2 -> "Normal"
-                3 -> "Difficile"
-                else -> "Normal"
+                1 -> getString(R.string.difficulty_easy)
+                2 -> getString(R.string.difficulty_normal)
+                3 -> getString(R.string.difficulty_hard)
+                else -> getString(R.string.difficulty_normal)
             }
             binding.tvDifficultyValue.text = difficultyText
             
@@ -128,7 +128,7 @@ class TeamCreationFragment : Fragment() {
             val teamName = binding.etTeamName.text.toString().trim()
             
             if (teamName.isEmpty()) {
-                binding.tilTeamName.error = "Veuillez entrer un nom d'équipe"
+                binding.tilTeamName.error = getString(R.string.error_empty_team_name)
                 return@setOnClickListener
             }
             
@@ -155,9 +155,8 @@ class TeamCreationFragment : Fragment() {
         viewModel.teamCreated.observe(viewLifecycleOwner) { success ->
             if (success) {
                 // Navigation vers l'écran principal
-                Toast.makeText(requireContext(), "Équipe créée avec succès !", Toast.LENGTH_SHORT).show()
-                // TODO: Naviguer vers l'écran principal
-                // findNavController().navigate(TeamCreationFragmentDirections.actionTeamCreationToMain())
+                Toast.makeText(requireContext(), getString(R.string.msg_team_created), Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_teamCreation_to_main)
             }
         }
         
