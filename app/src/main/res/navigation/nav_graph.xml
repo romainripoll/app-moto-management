@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.romainripoll.motogpmanager.ui.splash.SplashFragment"
+        android:label="Splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splash_to_teamCreation"
+            app:destination="@id/teamCreationFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_to_main"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamCreationFragment"
+        android:name="com.romainripoll.motogpmanager.ui.teamcreation.TeamCreationFragment"
+        android:label="Création d'équipe"
+        tools:layout="@layout/fragment_team_creation">
+        <action
+            android:id="@+id/action_teamCreation_to_main"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.romainripoll.motogpmanager.ui.main.MainFragment"
+        android:label="Tableau de bord"
+        tools:layout="@layout/fragment_main">
+        <!-- Les actions vers les autres écrans seront ajoutées ici -->
+    </fragment>
+
+</navigation>
