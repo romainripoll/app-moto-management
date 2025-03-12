@@ -15,7 +15,7 @@
         tools:targetApi="31">
         
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MotoGPManager.NoActionBar">
             <intent-filter>
@@ -23,16 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MotoGPManager" />
-            
-        <activity
-            android:name=".ui.race.RaceActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MotoGPManager.NoActionBar" />
     </application>
 
 </manifest>
