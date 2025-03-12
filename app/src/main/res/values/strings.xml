@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MotoGP Manager</string>
+    <string name="app_logo">MotoGP Logo</string>
+    
+    <!-- Main Navigation -->
+    <string name="nav_team">Team</string>
+    <string name="nav_riders">Riders</string>
+    <string name="nav_bikes">Bikes</string>
+    <string name="nav_races">Races</string>
+    <string name="nav_standings">Standings</string>
+    <string name="nav_finances">Finances</string>
+    
+    <!-- Team Management -->
+    <string name="team_name">Team Name</string>
+    <string name="team_budget">Budget</string>
+    <string name="team_staff">Staff</string>
+    <string name="team_facilities">Facilities</string>
+    
+    <!-- Rider Management -->
+    <string name="rider_name">Name</string>
+    <string name="rider_age">Age</string>
+    <string name="rider_nationality">Nationality</string>
+    <string name="rider_skill">Skill</string>
+    <string name="rider_experience">Experience</string>
+    <string name="rider_salary">Salary</string>
+    <string name="rider_sign">Sign Rider</string>
+    <string name="rider_fire">Release</string>
+    <string name="rider_train">Train</string>
+    
+    <!-- Bike Management -->
+    <string name="bike_model">Model</string>
+    <string name="bike_engine">Engine</string>
+    <string name="bike_chassis">Chassis</string>
+    <string name="bike_electronics">Electronics</string>
+    <string name="bike_aerodynamics">Aerodynamics</string>
+    <string name="bike_upgrade">Upgrade</string>
+    <string name="bike_develop">Develop</string>
+    
+    <!-- Race Management -->
+    <string name="race_circuit">Circuit</string>
+    <string name="race_country">Country</string>
+    <string name="race_length">Length</string>
+    <string name="race_date">Date</string>
+    <string name="race_qualify">Qualify</string>
+    <string name="race_start">Start Race</string>
+    <string name="race_results">Results</string>
+    <string name="race_weather">Weather</string>
+    
+    <!-- Game Actions -->
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_next">Next</string>
+    <string name="action_back">Back</string>
+</resources>
