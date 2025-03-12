@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MotoGP Manager</string>
-    <string name="app_logo">MotoGP Logo</string>
+    <string name="app_name">MotoGP Team Manager</string>
     
-    <!-- Main Navigation -->
-    <string name="nav_team">Team</string>
-    <string name="nav_riders">Riders</string>
-    <string name="nav_bikes">Bikes</string>
-    <string name="nav_races">Races</string>
-    <string name="nav_standings">Standings</string>
-    <string name="nav_finances">Finances</string>
+    <!-- Écrans -->
+    <string name="title_team_creation">Création d\'équipe</string>
+    <string name="title_main">Tableau de bord</string>
+    <string name="title_riders">Pilotes</string>
+    <string name="title_bikes">Motos</string>
+    <string name="title_race">Course</string>
     
-    <!-- Team Management -->
-    <string name="team_name">Team Name</string>
-    <string name="team_budget">Budget</string>
-    <string name="team_staff">Staff</string>
-    <string name="team_facilities">Facilities</string>
+    <!-- Actions -->
+    <string name="action_new_game">Nouvelle partie</string>
+    <string name="action_continue">Continuer</string>
+    <string name="action_save">Sauvegarder</string>
+    <string name="action_create">Créer</string>
+    <string name="action_cancel">Annuler</string>
     
-    <!-- Rider Management -->
-    <string name="rider_name">Name</string>
-    <string name="rider_age">Age</string>
-    <string name="rider_nationality">Nationality</string>
-    <string name="rider_skill">Skill</string>
-    <string name="rider_experience">Experience</string>
-    <string name="rider_salary">Salary</string>
-    <string name="rider_sign">Sign Rider</string>
-    <string name="rider_fire">Release</string>
-    <string name="rider_train">Train</string>
+    <!-- Création d\'équipe -->
+    <string name="team_name_hint">Nom de l\'équipe</string>
+    <string name="team_color_hint">Couleur principale</string>
+    <string name="team_manufacturer_hint">Marque de moto</string>
+    <string name="team_difficulty_hint">Niveau de difficulté</string>
+    <string name="difficulty_easy">Facile</string>
+    <string name="difficulty_normal">Normal</string>
+    <string name="difficulty_hard">Difficile</string>
     
-    <!-- Bike Management -->
-    <string name="bike_model">Model</string>
-    <string name="bike_engine">Engine</string>
-    <string name="bike_chassis">Chassis</string>
-    <string name="bike_electronics">Electronics</string>
-    <string name="bike_aerodynamics">Aerodynamics</string>
-    <string name="bike_upgrade">Upgrade</string>
-    <string name="bike_develop">Develop</string>
+    <!-- Messages -->
+    <string name="msg_team_created">Équipe créée avec succès!</string>
+    <string name="msg_loading">Chargement…</string>
+    <string name="msg_no_saved_game">Aucune partie sauvegardée</string>
+    <string name="msg_coming_soon">Fonctionnalité à venir</string>
+    <string name="error_empty_team_name">Veuillez entrer un nom d\'équipe</string>
+    <string name="error_loading_data">Erreur lors du chargement des données</string>
     
-    <!-- Race Management -->
-    <string name="race_circuit">Circuit</string>
-    <string name="race_country">Country</string>
-    <string name="race_length">Length</string>
-    <string name="race_date">Date</string>
-    <string name="race_qualify">Qualify</string>
-    <string name="race_start">Start Race</string>
-    <string name="race_results">Results</string>
-    <string name="race_weather">Weather</string>
+    <!-- Pilotes -->
+    <string name="rider_hire">Recruter un pilote</string>
+    <string name="rider_train">Entraîner</string>
+    <string name="rider_dismiss">Licencier</string>
+    <string name="rider_skill">Compétence: %1$d</string>
+    <string name="rider_consistency">Constance: %1$d</string>
+    <string name="rider_salary">Salaire: %1$d €</string>
     
-    <!-- Game Actions -->
-    <string name="action_save">Save</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="action_confirm">Confirm</string>
-    <string name="action_next">Next</string>
-    <string name="action_back">Back</string>
+    <!-- Motos -->
+    <string name="bike_upgrade">Améliorer</string>
+    <string name="bike_acceleration">Accélération: %1$d</string>
+    <string name="bike_top_speed">Vitesse max: %1$d</string>
+    <string name="bike_handling">Maniabilité: %1$d</string>
+    <string name="bike_braking">Freinage: %1$d</string>
+    <string name="bike_reliability">Fiabilité: %1$d</string>
+    
+    <!-- Course -->
+    <string name="race_start">Lancer la course</string>
+    <string name="race_results">Résultats</string>
+    <string name="race_position">Position: %1$d</string>
+    <string name="race_points">Points: %1$d</string>
+    <string name="race_earnings">Gains: %1$d €</string>
 </resources>
